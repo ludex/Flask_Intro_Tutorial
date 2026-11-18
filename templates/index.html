@@ -26,7 +26,9 @@
                 <td>{{task.content}}</td>
                 <td>{{task.date_created.date()}}</td>
                 <td>
-                    <a href="/delete/{{task.id}}">Delete</a>
+                    <form action="/delete/{{task.id}}" method="POST" style="display: inline">
+                        <button type="submit">Delete</button>
+                    </form>
                     <br>
                     <a href="/update/{{task.id}}">Update</a>
                 </td>
