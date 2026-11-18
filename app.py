@@ -1,4 +1,6 @@
-from flask import Flask, render_template, url_for, request, redirect
+import os
+
+from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 #from werkzeug.utils import redirect
@@ -33,7 +35,7 @@ def index():
         tasks = Todo.query.order_by(Todo.date_created).all()
         return render_template('index.html', tasks=tasks)
 
-@app.route('/delete/<int:id>')
+@app.post('/delete/<int:id>')
 def delete(id):
     task_to_delete = Todo.query.get_or_404(id)
 
@@ -64,4 +66,4 @@ def update(id):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="127.0.0.1", debug=os.environ.get("FLASK_DEBUG") == "1")
